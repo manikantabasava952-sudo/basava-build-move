@@ -1,0 +1,1 @@
+Replace 919999999999 in index.html with your WhatsApp number, then upload the folder to your hosting provider.

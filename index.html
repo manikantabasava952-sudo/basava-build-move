@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Basava Build & Move</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#17232d;background:#f5f6f7}
+header{background:#fff;box-shadow:0 2px 12px #0002;position:sticky;top:0;z-index:2}.nav{max-width:1100px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:12px;align-items:center}.logo{width:64px;height:64px;object-fit:cover;border-radius:8px}.brand b{color:#123c5a;font-size:20px}.brand small{display:block;color:#667;font-size:11px}nav a{margin-left:18px;color:#17232d;text-decoration:none;font-weight:bold}
+.hero{background:#123c5a;color:#fff;padding:65px 18px}.heroin{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}.hero h1{font-size:48px;line-height:1;margin:0}.hero h1 span{color:#f28a24}.hero p{font-size:18px}.btn{display:inline-block;padding:13px 20px;background:#f28a24;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold;margin-top:12px}.cardbox{background:#fff;color:#17232d;padding:25px;border-radius:16px}
+section{max-width:1100px;margin:auto;padding:50px 18px}h2{text-align:center;color:#123c5a;font-size:30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;padding:24px;border-radius:14px;border-top:4px solid #f28a24;box-shadow:0 3px 15px #0001}.icon{font-size:32px}.card h3{color:#123c5a}
+.form{max-width:800px;margin:auto;background:#fff;padding:25px;border-radius:15px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-weight:bold}input,select,textarea{width:100%;padding:12px;margin-top:5px;border:1px solid #ccd2d6;border-radius:7px;font:inherit}textarea{min-height:100px}.full{grid-column:1/-1}button{width:100%;padding:14px;border:0;border-radius:8px;background:#f28a24;color:#fff;font-weight:bold;font-size:16px}
+.about{max-width:none;background:#123c5a;color:#fff}.about div{max-width:1100px;margin:auto}.about h2{color:#fff}.about p{text-align:center}
+footer{text-align:center;background:#0d1a23;color:#ccd;padding:24px;font-size:13px}
+@media(max-width:750px){nav{display:none}.heroin{grid-template-columns:1fr}.hero h1{font-size:38px}.grid,.fields{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head>
+<body>
+<header><div class="nav"><div class="brand"><img class="logo" src="assets/basava-logo.jpg"><div><b>BASAVA BUILD & MOVE</b><small>Basava's Group of Constructions • Sri Pardhasardhi Lorry Service</small></div></div><nav><a href="#services">Services</a><a href="#booking">Book Now</a></nav></div></header>
+<div class="hero"><div class="heroin"><div><h1>Book. <span>Move.</span> Build.</h1><p>Construction materials, JCB/excavator, tipper and lorry services arranged for delivery directly to your site.</p><a class="btn" href="#booking">BOOK NOW</a></div><div class="cardbox"><h3>One place for your site needs</h3><p>✓ Materials sourcing</p><p>✓ JCB & excavator booking</p><p>✓ Tipper & lorry booking</p><p>✓ Site delivery coordination</p></div></div></div>
+<section id="services"><h2>Our Services</h2><div class="grid">
+<div class="card"><div class="icon">🏗️</div><h3>Construction Materials</h3><p>Sand, aggregates, bricks, cement, steel and other site requirements.</p></div>
+<div class="card"><div class="icon">🚜</div><h3>JCB & Excavators</h3><p>Request equipment for excavation, leveling, loading and site work.</p></div>
+<div class="card"><div class="icon">🚚</div><h3>Tipper & Lorry</h3><p>Arrange vehicles for construction-material transport and delivery.</p></div>
+</div></section>
+<section id="booking"><h2>Book a Service</h2><div class="form"><form id="f"><div class="fields">
+<label>Name<input id="n" required></label><label>Mobile<input id="p" required type="tel"></label>
+<label>Service<select id="s" required><option value="">Select</option><option>Construction materials</option><option>JCB / Excavator</option><option>Tipper</option><option>Lorry / Transport</option></select></label>
+<label>Quantity / Requirement<input id="q" placeholder="e.g. 5 units / 1 day"></label>
+<label class="full">Site / Delivery Location<textarea id="l" required></textarea></label>
+<label>Required Date<input id="d" type="date"></label><label>Extra Details<input id="x"></label>
+<div class="full"><button>SEND BOOKING REQUEST</button></div></div></form><p style="font-size:12px;color:#667">Replace the demo WhatsApp number in this file before publishing.</p></div></section>
+<section class="about"><div><h2>About Us</h2><p><b>BASAVA'S GROUP OF CONSTRUCTIONS</b> and <b>SRI PARDHASARDHI LORRY SERVICE</b> bring construction and transport services together to make site bookings easier.</p></div></section>
+<footer>© 2026 Basava Build & Move</footer>
+<script>
+f.onsubmit=e=>{e.preventDefault();let m=`New Booking Request%0AName: ${encodeURIComponent(n.value)}%0AMobile: ${encodeURIComponent(p.value)}%0AService: ${encodeURIComponent(s.value)}%0ARequirement: ${encodeURIComponent(q.value)}%0ALocation: ${encodeURIComponent(l.value)}%0ADate: ${encodeURIComponent(d.value)}%0ADetails: ${encodeURIComponent(x.value)}`;window.open('https://wa.me/919999999999?text='+m,'_blank')}
+</script></body></html>
