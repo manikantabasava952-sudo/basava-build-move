@@ -109,7 +109,8 @@ Construction Materials | Earthmoving Equipment | Transportation
   <div class="cardbody">
     <h3>JCB Services</h3>
     <p>Excavation, earthwork, site cleaning, loading and land levelling enquiries.</p>
-    <a href="#booking">Request JCB Quote →</a>
+    <a href="#booking" onclick="setMode('Quotation');setService('JCB Services')">Request Quotation</a>
+<a href="#booking" onclick="setMode('Booking');setService('JCB Services')">Book Now</a>
   </div>
 </div>
 
@@ -118,7 +119,8 @@ Construction Materials | Earthmoving Equipment | Transportation
   <div class="cardbody">
     <h3>Hitachi Excavators</h3>
     <p>Request excavator availability and hourly quotations for your project.</p>
-    <a href="#booking">Request Hitachi Quote →</a>
+    <a href="#booking" onclick="setMode('Quotation');setService('Hitachi Excavators')">Request Quotation</a>
+<a href="#booking" onclick="setMode('Booking');setService('Hitachi Excavators')">Book Now</a>
   </div>
 </div>
 
@@ -127,7 +129,8 @@ Construction Materials | Earthmoving Equipment | Transportation
   <div class="cardbody">
     <h3>Construction Materials</h3>
     <p>Sand, stone dust, aggregates, bricks, cement and other site requirements.</p>
-    <a href="#booking">Request Latest Rates →</a>
+<a href="#booking" onclick="setMode('Quotation');setService('Construction Materials')">Request Quotation</a>
+<a href="#booking" onclick="setMode('Booking');setService('Construction Materials')">Book Now</a>
   </div>
 </div>
 
@@ -136,7 +139,8 @@ Construction Materials | Earthmoving Equipment | Transportation
   <div class="cardbody">
     <h3>Tipper Services</h3>
     <p>Enquire about tipper transportation for sand, aggregates, soil and materials.</p>
-    <a href="#booking">Request Tipper Quote →</a>
+    <a href="#booking" onclick="setMode('Quotation');setService('Tipper Services')">Request Quotation</a>
+<a href="#booking" onclick="setMode('Booking');setService('Tipper Services')">Book Now</a>
   </div>
 </div>
 
@@ -145,7 +149,8 @@ Construction Materials | Earthmoving Equipment | Transportation
   <div class="cardbody">
     <h3>Lorry Transportation</h3>
     <p>Request transport arrangements for construction materials and goods.</p>
-    <a href="#booking">Request Transport Quote →</a>
+    <a href="#booking" onclick="setMode('Quotation');setService('Lorry Transportation')">Request Quotation</a>
+<a href="#booking" onclick="setMode('Booking');setService('Lorry Transportation')">Book Now</a>
   </div>
 </div>
 
@@ -154,7 +159,8 @@ Construction Materials | Earthmoving Equipment | Transportation
   <div class="cardbody">
     <h3>Construction & Site Work</h3>
     <p>Enquire about building construction, site preparation and related work.</p>
-    <a href="#booking">Discuss Your Project →</a>
+   <a href="#booking" onclick="setMode('Quotation');setService('Construction & Site Work')">Request Quotation</a>
+<a href="#booking" onclick="setMode('Booking');setService('Construction & Site Work')">Book Now</a> 
   </div>
 </div>
 
@@ -254,23 +260,264 @@ WhatsApp: +91 94406 70385<br>
 <small>Construction and machinery photographs: Unsplash contributors, used under the Unsplash License.</small>
 </footer>
 
+
 <script>
-document.getElementById('f').addEventListener('submit',function(e){
-e.preventDefault();
+let enquiryMode = 'Quotation';
 
-const message=`New Booking / Quotation Request
-Name: ${document.getElementById('n').value}
-Mobile: ${document.getElementById('p').value}
-Service: ${document.getElementById('s').value}
-Requirement: ${document.getElementById('q').value}
-Location: ${document.getElementById('l').value}
-Date: ${document.getElementById('d').value}
-Details: ${document.getElementById('x').value}`;
+function setMode(mode) {
+  enquiryMode = mode;
 
-const whatsappURL='https://wa.me/919440670385?text='+encodeURIComponent(message);
-window.location.href=whatsappURL;
+  document.getElementById('modeInfo').textContent =
+    mode === 'Booking'
+      ? 'Submit a booking request. Availability and price will be confirmed by our team.'
+      : 'Request the latest quotation for your requirement.';
+
+  document.getElementById('submitBtn').textContent =
+    mode === 'Booking'
+      ? 'SEND BOOKING REQUEST ON WHATSAPP'
+      : 'SEND QUOTATION REQUEST ON WHATSAPP';
+}
+
+function showServiceFields() {
+  const service = document.getElementById('s').value;
+  const area = document.getElementById('serviceFields');
+
+  let html = '';
+
+  if (service === 'JCB Services' || service === 'Hitachi Excavators') {
+    html = `
+      <h3>${service} Details</h3>
+      <label>Required Working Hours
+        <input id="hours" type="number" min="1" step="1"
+          placeholder="Example: 8 hours" required>
+      </label>
+      <label>Type of Work
+        <select id="workType" required>
+          <option value="">Select work</option>
+          <option>Excavation</option>
+          <option>Earthwork</option>
+          <option>Site cleaning</option>
+          <option>Land levelling</option>
+          <option>Loading</option>
+          <option>Rock breaking</option>
+          <option>Other work</option>
+        </select>
+      </label>`;
+  }
+
+  else if (service === 'Construction Materials') {
+    html = `
+      <h3>Material Requirements</h3>
+      <div id="materialRows">
+        <div class="material-row">
+          <label>Material
+            <select class="materialName" required>
+              <option value="">Select material</option>
+              <option>River sand</option>
+              <option>Stone dust</option>
+              <option>20 mm aggregate</option>
+              <option>40 mm aggregate</option>
+              <option>Bricks</option>
+              <option>Cement</option>
+              <option>Other material</option>
+            </select>
+          </label>
+          <label>Quantity
+            <input class="materialQty" type="number" min="0.1"
+              step="any" placeholder="Enter quantity" required>
+          </label>
+          <label>Unit
+            <select class="materialUnit">
+              <option>Tonnes</option>
+              <option>Cubic feet (CFT)</option>
+              <option>Cubic metres</option>
+              <option>Bags</option>
+              <option>Bricks / Pieces</option>
+              <option>Loads</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <button type="button" onclick="addMaterial()">+ Add Another Material</button>`;
+  }
+
+  else if (service === 'Tipper Services') {
+    html = `
+      <h3>Tipper Details</h3>
+      <label>Material
+        <select id="tipperMaterial" required>
+          <option value="">Select material</option>
+          <option>Sand</option>
+          <option>Stone dust</option>
+          <option>Aggregates</option>
+          <option>Soil</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Number of Trips
+        <input id="trips" type="number" min="1" placeholder="Number of trips" required>
+      </label>
+      <label>Load Capacity (if known)
+        <input id="loadSize" placeholder="Example: 10 tonnes">
+      </label>`;
+  }
+
+  else if (service === 'Lorry Transportation') {
+    html = `
+      <h3>Transportation Details</h3>
+      <label>Goods / Material
+        <input id="goods" required placeholder="What needs transportation?">
+      </label>
+      <label>Number of Trips
+        <input id="trips" type="number" min="1" placeholder="Number of trips" required>
+      </label>
+      <label>Approximate Weight
+        <input id="weight" placeholder="Example: 5 tonnes">
+      </label>
+      <label>From Location
+        <input id="fromLocation" required placeholder="Loading location">
+      </label>
+      <label>To Location
+        <input id="toLocation" required placeholder="Delivery location">
+      </label>`;
+  }
+
+  else if (service === 'Construction & Site Work') {
+    html = `
+      <h3>Project Details</h3>
+      <label>Type of Work
+        <select id="constructionType" required>
+          <option value="">Select work</option>
+          <option>Building construction</option>
+          <option>Site preparation</option>
+          <option>Renovation</option>
+          <option>Compound wall</option>
+          <option>Other civil work</option>
+        </select>
+      </label>
+      <label>Plot / Building Dimensions
+        <input id="dimensions" placeholder="Example: 30 x 40 feet">
+      </label>
+      <label>Project Description
+        <textarea id="projectDetails" placeholder="Describe your project"></textarea>
+      </label>`;
+  }
+
+  area.innerHTML = html ||
+    '<p>Please select a service to see its requirements.</p>';
+}
+
+function addMaterial() {
+  const row = document.createElement('div');
+  row.className = 'material-row';
+
+  row.innerHTML = `
+    <label>Material
+      <select class="materialName" required>
+        <option value="">Select material</option>
+        <option>River sand</option>
+        <option>Stone dust</option>
+        <option>20 mm aggregate</option>
+        <option>40 mm aggregate</option>
+        <option>Bricks</option>
+        <option>Cement</option>
+        <option>Other material</option>
+      </select>
+    </label>
+    <label>Quantity
+      <input class="materialQty" type="number" min="0.1"
+        step="any" placeholder="Enter quantity" required>
+    </label>
+    <label>Unit
+      <select class="materialUnit">
+        <option>Tonnes</option>
+        <option>Cubic feet (CFT)</option>
+        <option>Cubic metres</option>
+        <option>Bags</option>
+        <option>Bricks / Pieces</option>
+        <option>Loads</option>
+      </select>
+    </label>
+    <button type="button" onclick="this.parentElement.remove()">Remove Material</button>
+  `;
+
+  document.getElementById('materialRows').appendChild(row);
+}
+
+function getRequirements(service) {
+  if (service === 'JCB Services' || service === 'Hitachi Excavators') {
+    return 'Working Hours: ' + document.getElementById('hours').value +
+      '\nWork Type: ' + document.getElementById('workType').value;
+  }
+
+  if (service === 'Construction Materials') {
+    const names = document.querySelectorAll('.materialName');
+    const quantities = document.querySelectorAll('.materialQty');
+    const units = document.querySelectorAll('.materialUnit');
+
+    let result = 'Materials:\n';
+
+    names.forEach((item, i) => {
+      result += item.value + ': ' + quantities[i].value +
+        ' ' + units[i].value + '\n';
+    });
+
+    return result;
+  }
+
+  if (service === 'Tipper Services') {
+    return 'Material: ' + document.getElementById('tipperMaterial').value +
+      '\nTrips: ' + document.getElementById('trips').value +
+      '\nLoad Capacity: ' + document.getElementById('loadSize').value;
+  }
+
+  if (service === 'Lorry Transportation') {
+    return 'Goods: ' + document.getElementById('goods').value +
+      '\nTrips: ' + document.getElementById('trips').value +
+      '\nWeight: ' + document.getElementById('weight').value +
+      '\nFrom: ' + document.getElementById('fromLocation').value +
+      '\nTo: ' + document.getElementById('toLocation').value;
+  }
+
+  if (service === 'Construction & Site Work') {
+    return 'Work Type: ' + document.getElementById('constructionType').value +
+      '\nDimensions: ' + document.getElementById('dimensions').value +
+      '\nProject: ' + document.getElementById('projectDetails').value;
+  }
+
+  return '';
+}
+
+document.getElementById('f').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const service = document.getElementById('s').value;
+  const requirements = getRequirements(service);
+
+  const message =
+    'BASAVA BUILD & MOVE - ' + enquiryMode.toUpperCase() + ' REQUEST\n\n' +
+    'Name: ' + document.getElementById('n').value +
+    '\nMobile: ' + document.getElementById('p').value +
+    '\nService: ' + service +
+    '\n\nRequirements:\n' + requirements +
+    '\nLocation: ' + document.getElementById('l').value +
+    '\nDate: ' + document.getElementById('d').value +
+    '\nPreferred Time: ' + document.getElementById('t').value +
+    '\nExtra Details: ' + document.getElementById('x').value +
+    '\n\nPlease confirm availability and quotation.';
+
+  const whatsappURL =
+    'https://wa.me/919440670385?text=' + encodeURIComponent(message);
+
+  window.location.href = whatsappURL;
 });
+
+function setService(service) {
+  document.getElementById('s').value = service;
+  showServiceFields();
+}
 </script>
+
 
 </body>
 </html>
