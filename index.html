@@ -172,58 +172,71 @@ Material prices and machinery charges can change. Contact us with your location,
 <a class="btn" href="#booking">SEND YOUR REQUIREMENT</a>
 </div>
 
+
 <section id="booking">
-<h2>Request a Booking / Quotation</h2>
-<p class="sub">Share your requirement. We will receive your details through WhatsApp.</p>
+  <h2>Basava Build & Move – Service Enquiry</h2>
+  <p class="sub">Choose quotation or booking and share your requirements.</p>
 
-<div class="form">
-<form id="f">
-<div class="fields">
+  <div class="form">
+    <form id="f">
+      <div class="fields">
 
-<label>Name
-<input id="n" required>
-</label>
+        <div class="full">
+          <h3>Select Your Option</h3>
+          <button type="button" onclick="setMode('Quotation')" id="quoteBtn">Request Quotation</button>
+          <button type="button" onclick="setMode('Booking')" id="bookBtn">Book Now</button>
+          <p id="modeInfo">Get the latest price for your requirement.</p>
+        </div>
 
-<label>Mobile Number
-<input id="p" type="tel" required>
-</label>
+        <label>Name
+          <input id="n" required placeholder="Your full name">
+        </label>
 
-<label>Service
-<select id="s" required>
-<option value="">Select service</option>
-<option>Construction materials</option>
-<option>JCB services</option>
-<option>Hitachi excavator</option>
-<option>Tipper</option>
-<option>Lorry transportation</option>
-<option>Construction / Site work</option>
-<option>Other enquiry</option>
-</select>
-</label>
+        <label>Mobile Number
+          <input id="p" type="tel" required placeholder="Your mobile number">
+        </label>
 
-<label>Quantity / Requirement
-<input id="q" placeholder="e.g. 5 units / 8 hours / 1 day">
-</label>
+        <label class="full">Select Service
+          <select id="s" required onchange="showServiceFields()">
+            <option value="">Select service</option>
+            <option>JCB Services</option>
+            <option>Hitachi Excavators</option>
+            <option>Construction Materials</option>
+            <option>Tipper Services</option>
+            <option>Lorry Transportation</option>
+            <option>Construction & Site Work</option>
+          </select>
+        </label>
 
-<label class="full">Site / Delivery Location
-<textarea id="l" required></textarea>
-</label>
+        <div class="full" id="serviceFields">
+          Select a service to see its requirements.
+        </div>
 
-<label>Required Date
-<input id="d" type="date">
-</label>
+        <label class="full">Site / Delivery Location
+          <textarea id="l" required placeholder="Enter complete location"></textarea>
+        </label>
 
-<label>Extra Details
-<input id="x" placeholder="Any additional information">
-</label>
+        <label>Required Date
+          <input id="d" type="date">
+        </label>
 
-<div class="full">
-<button type="submit">SEND BOOKING REQUEST ON WHATSAPP</button>
-</div>
+        <label id="timeLabel">Preferred Time (optional)
+          <input id="t" type="time">
+        </label>
 
-</div>
-</form>
-</div>
+        <label class="full">Extra Details
+          <textarea id="x" placeholder="Any additional information"></textarea>
+        </label>
+
+        <div class="full">
+          <button type="submit" id="submitBtn">
+            SEND QUOTATION REQUEST ON WHATSAPP
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
 </section>
 
 <div class="about" id="about">
