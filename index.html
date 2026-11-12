@@ -261,6 +261,16 @@ h2 {
   display: block;
 }
 
+.card img.vehicle-photo-stack {
+  height: 170px;
+  object-fit: contain;
+  background: #f1f3f5;
+  padding: 5px;
+}
+.card img.vehicle-photo-stack + img.vehicle-photo-stack {
+  border-top: 3px solid #ffffff;
+}
+
 .cardbody {
   padding: 20px;
 }
@@ -615,29 +625,36 @@ footer a {
     </div>
 
     <div class="card">
-      <img
-        src="https://images.unsplash.com/photo-1778068846016-b0ae7a27abbe?auto=format&fit=crop&w=900&q=80"
-        alt="Tipper truck at a construction site">
+      <img class="vehicle-photo-stack"
+        src="https://ik.imagekit.io/TrucksBuses/uploads/Tata%20SK%201613%20Hymiler%20Dumper%20Tipper.jpg"
+        alt="Tata SK 1613 Hymiler tipper truck">
+      <img class="vehicle-photo-stack"
+        src="https://www.bharatbenz.com/uploads/used_truck_gallery/BB0049416C-3.jpeg"
+        alt="BharatBenz 1623C tipper truck">
       <div class="cardbody">
-        <h3>Tipper Services</h3>
-        <p>Enquire about tipper transportation for sand, aggregates, soil and materials.</p>
+        <h3>Tipper &amp; Lorry Transportation</h3>
+        <p>Transportation enquiries for sand, aggregates, soil, construction materials and other goods. Tata and BharatBenz tipper options are shown above.</p>
         <div class="card-actions">
-          <a href="#booking" onclick="setMode('Quotation');setService('Tipper Services')">Request Quotation</a>
-          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Tipper Services')">Book Now</a>
+          <a href="#booking" onclick="setMode('Quotation');setService('Tipper & Lorry Transportation')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Tipper & Lorry Transportation')">Book Now</a>
         </div>
       </div>
     </div>
 
     <div class="card">
       <img
-        src="https://cmv360.s3.ap-southeast-1.amazonaws.com/gallery_tata_sk_1613_bfc3d2077f.webp"
-        alt="Tata SK 1613 tipper truck">
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/HMT_3522_tractor_with_trailer.jpg?width=1200"
+        alt="Real photograph of an Indian HMT 3522 tractor with trailer">
+      <p class="photo-credit" style="font-size:11px; min-height:0; margin:6px 20px 0; color:#64717b;">
+        Photo: Kinshuk Sunil / Wikimedia Commons —
+        <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">CC BY-SA 2.0</a>
+      </p>
       <div class="cardbody">
-        <h3>Lorry Transportation</h3>
-        <p>Request transport arrangements for construction materials and goods using lorry services.</p>
+        <h3>Tractor Services</h3>
+        <p>Tractor with trolley, ploughing, rotavator, cultivation, land levelling, site cleaning and earthwork enquiries.</p>
         <div class="card-actions">
-          <a href="#booking" onclick="setMode('Quotation');setService('Lorry Transportation')">Request Quotation</a>
-          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Lorry Transportation')">Book Now</a>
+          <a href="#booking" onclick="setMode('Quotation');setService('Tractor Services')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Tractor Services')">Book Now</a>
         </div>
       </div>
     </div>
@@ -692,7 +709,7 @@ footer a {
               Book Now
             </button>
           </div>
-          <p id="modeInfo">Get the latest price for your requirement.</p>
+          <p id="modeInfo">Request availability and a quotation first. You can book after accepting our quotation.</p>
         </div>
 
         <label>
@@ -712,8 +729,8 @@ footer a {
             <option>JCB Services</option>
             <option>Hitachi Excavators</option>
             <option>Construction Materials</option>
-            <option>Tipper Services</option>
-            <option>Lorry Transportation</option>
+            <option>Tipper &amp; Lorry Transportation</option>
+            <option>Tractor Services</option>
             <option>Construction &amp; Site Work</option>
           </select>
         </label>
@@ -721,6 +738,13 @@ footer a {
         <div class="full" id="serviceFields">
           <p>Select a service to see its requirements.</p>
         </div>
+
+        <label class="full" id="quotationReferenceWrap" style="display:none">
+          Accepted Quotation / Reference Number (mandatory for booking)
+          <input id="quotationReference" type="text"
+            placeholder="Enter the quotation reference shared by our team">
+          <small>Please enter the reference number from the quotation you accepted.</small>
+        </label>
 
         <label class="full">
           Site / Delivery Location
@@ -788,8 +812,13 @@ function setMode(mode) {
 
   document.getElementById('modeInfo').textContent =
     mode === 'Booking'
-      ? 'Booking request only. Availability and price will be confirmed by our team.'
-      : 'Get the latest price for your requirement.';
+      ? 'Already received and accepted our quotation? Enter its reference number to request booking confirmation.'
+      : 'Request availability and a quotation first. You can book after accepting our quotation.';
+
+  const referenceWrap = document.getElementById('quotationReferenceWrap');
+  const referenceInput = document.getElementById('quotationReference');
+  referenceWrap.style.display = mode === 'Booking' ? 'block' : 'none';
+  referenceInput.required = mode === 'Booking';
 
   document.getElementById('submitBtn').textContent =
     mode === 'Booking'
@@ -853,81 +882,70 @@ function showServiceFields() {
     `;
   }
 
-  else if (service === 'Tipper Services') {
+  else if (service === 'Tipper & Lorry Transportation') {
     html = `
-      <h3>Tipper Details</h3>
-
+      <h3>Tipper &amp; Lorry Transportation Details</h3>
       <label>
-        Select Tipper Type
-        <select id="tipperType" required onchange="updateTipperType()">
-          <option value="">Select tipper</option>
-          <option value="Small Tipper - 3 Units">Small Tipper - 3 Units</option>
-          <option value="Big Tipper - 6 Units">Big Tipper - 6 Units</option>
-          <option value="Other">Other</option>
+        Vehicle Type
+        <select id="transportVehicle" required>
+          <option value="">Select vehicle</option>
+          <option>Tata SK 1613 Tipper</option>
+          <option>BharatBenz 1623C Tipper</option>
+          <option>Other Tipper</option>
+          <option>Lorry / Goods Vehicle</option>
         </select>
       </label>
-
-      <label id="otherTipperLabel" style="display:none">
-        Specify Other Tipper
-        <input id="otherTipper" placeholder="Enter vehicle type">
-      </label>
-
-      <label>
-        Material to Transport
-        <select id="tipperMaterial" required onchange="updateTipperMaterial()">
-          <option value="">Select material</option>
-          <option>River Sand</option>
-          <option>Robo Sand</option>
-          <option>Gravel</option>
-          <option>Stone Dust</option>
-          <option>Soil</option>
-          <option>20 mm Aggregate</option>
-          <option>40 mm Aggregate</option>
-          <option>Other</option>
-        </select>
-      </label>
-
-      <label id="otherTipperMaterialLabel" style="display:none">
-        Specify Other Material
-        <input id="otherTipperMaterial" placeholder="Enter material name">
-      </label>
-
-      <label>
-        Number of Trips
-        <input id="trips" type="number" min="1"
-          placeholder="Enter number of trips" required>
-      </label>
-    `;
-  }
-
-  else if (service === 'Lorry Transportation') {
-    html = `
-      <h3>Transportation Details</h3>
-
       <label>
         Goods / Material
         <input id="goods" required placeholder="What needs transportation?">
       </label>
-
       <label>
         Number of Trips
-        <input id="trips" type="number" min="1"
-          placeholder="Number of trips" required>
+        <input id="trips" type="number" min="1" placeholder="Number of trips" required>
       </label>
-
       <label>
-        Approximate Weight
-        <input id="weight" placeholder="Example: 5 tonnes">
+        Approximate Weight / Quantity
+        <input id="weight" placeholder="Example: 5 tonnes / 6 units">
       </label>
-
       <label>
         From Location
         <input id="fromLocation" required placeholder="Loading location">
       </label>
-
       <label>
         To Location
         <input id="toLocation" required placeholder="Delivery location">
+      </label>
+    `;
+  }
+
+  else if (service === 'Tractor Services') {
+    html = `
+      <h3>Tractor Service Details</h3>
+      <label>
+        Type of Work
+        <select id="tractorWorkType" required>
+          <option value="">Select work</option>
+          <option>Tractor with trolley</option>
+          <option>Ploughing</option>
+          <option>Rotavator</option>
+          <option>Cultivation</option>
+          <option>Land levelling</option>
+          <option>Site cleaning</option>
+          <option>Earthwork</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>
+        Tractor / Attachment Required
+        <input id="tractorAttachment" placeholder="Example: trolley, rotavator">
+      </label>
+      <label>
+        Required Hours / Trips
+        <input id="tractorDuration" required placeholder="Example: 4 hours or 3 trips">
+      </label>
+      <label>
+        Additional Work Details
+        <input id="tractorDetails" placeholder="Describe the work if needed">
       </label>
     `;
   }
@@ -1103,33 +1121,20 @@ function getRequirements(service) {
     return result;
   }
 
-  if (service === 'Tipper Services') {
-    const type = document.getElementById('tipperType').value;
-    const material = document.getElementById('tipperMaterial').value;
-
-    return 'Tipper Type: ' +
-      (type === 'Other'
-        ? document.getElementById('otherTipper').value
-        : type) +
-      '\nMaterial: ' +
-      (material === 'Other'
-        ? document.getElementById('otherTipperMaterial').value
-        : material) +
-      '\nNumber of Trips: ' +
-      document.getElementById('trips').value;
+  if (service === 'Tipper & Lorry Transportation') {
+    return 'Vehicle Type: ' + document.getElementById('transportVehicle').value +
+      '\nGoods / Material: ' + document.getElementById('goods').value +
+      '\nTrips: ' + document.getElementById('trips').value +
+      '\nApproximate Weight / Quantity: ' + document.getElementById('weight').value +
+      '\nFrom: ' + document.getElementById('fromLocation').value +
+      '\nTo: ' + document.getElementById('toLocation').value;
   }
 
-  if (service === 'Lorry Transportation') {
-    return 'Goods: ' +
-      document.getElementById('goods').value +
-      '\nTrips: ' +
-      document.getElementById('trips').value +
-      '\nWeight: ' +
-      document.getElementById('weight').value +
-      '\nFrom: ' +
-      document.getElementById('fromLocation').value +
-      '\nTo: ' +
-      document.getElementById('toLocation').value;
+  if (service === 'Tractor Services') {
+    return 'Type of Work: ' + document.getElementById('tractorWorkType').value +
+      '\nTractor / Attachment: ' + document.getElementById('tractorAttachment').value +
+      '\nRequired Hours / Trips: ' + document.getElementById('tractorDuration').value +
+      '\nAdditional Details: ' + document.getElementById('tractorDetails').value;
   }
 
   if (service === 'Construction & Site Work') {
@@ -1157,11 +1162,16 @@ document.getElementById('f').addEventListener('submit', function(e) {
     '\nMobile: ' + document.getElementById('p').value +
     '\nService: ' + service +
     '\n\nRequirements:\n' + requirements +
+    (enquiryMode === 'Booking'
+      ? '\nAccepted Quotation Reference: ' + document.getElementById('quotationReference').value
+      : '') +
     '\nLocation: ' + document.getElementById('l').value +
     '\nDate: ' + document.getElementById('d').value +
     '\nPreferred Time: ' + document.getElementById('t').value +
     '\nExtra Details: ' + document.getElementById('x').value +
-    '\n\nPlease confirm availability and quotation.';
+    (enquiryMode === 'Booking'
+      ? '\n\nI have accepted the quotation shared by Basava Build & Move. Please proceed with my booking and confirm the service date and availability.'
+      : '\n\nPlease check availability and share your best quotation for my requirements.');
 
   const whatsappURL =
     'https://wa.me/919440670385?text=' +
@@ -1209,4 +1219,4 @@ setMode('Quotation');
 </script>
 
 </body>
-  </html>
+</html>
