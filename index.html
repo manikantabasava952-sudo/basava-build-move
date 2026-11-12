@@ -12,6 +12,93 @@
 <link rel="icon" type="image/jpeg" href="basava-logo.jpg">
 
 <style>
+
+/* BASAVA BUILD & MOVE ENQUIRY CONFIRMATION */
+.confirmation-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.82);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.confirmation-box {
+  background: #ffffff;
+  color: #222;
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 20px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.confirmation-logo-ring {
+  width: 115px;
+  height: 115px;
+  margin: 20px auto;
+  border: 4px solid #e58b24;
+  border-top-color: #174a85;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: basavaSpin 3s linear infinite;
+}
+
+.confirmation-logo-ring img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 50%;
+  animation: basavaSpinReverse 3s linear infinite;
+}
+
+@keyframes basavaSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes basavaSpinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+.confirmation-box h2 {
+  color: #174a85;
+  margin: 0 0 12px;
+}
+
+.confirmation-box p {
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.confirmation-box h3 {
+  color: #174a85;
+  margin: 18px 0 8px;
+}
+
+.confirmation-button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: #16834a;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.confirmation-status {
+  color: #64717b;
+  font-size: 13px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -418,6 +505,32 @@ footer a {
 </head>
 
 <body>
+
+
+<div class="confirmation-overlay" id="confirmationOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="confirmationTitle">
+  <div class="confirmation-box">
+    <h2 id="confirmationTitle">Thank You for Choosing Us!</h2>
+    <div class="confirmation-logo-ring">
+      <img src="basava-logo.jpg" alt="Basava Build & Move Logo">
+    </div>
+    <p><strong>Your enquiry details are ready to send to Basava Build &amp; Move.</strong></p>
+    <p>
+      We value your interest in our services. Continue to WhatsApp
+      and tap <strong>Send</strong> so our team receives your requirements.
+    </p>
+    <h3>Building Trust. Moving Progress.</h3>
+    <button type="button" class="confirmation-button"
+            onclick="continueToWhatsApp()">
+      Continue to WhatsApp now
+    </button>
+    <p class="confirmation-status" id="confirmationStatus"
+       aria-live="polite">
+      Opening WhatsApp shortly...
+    </p>
+  </div>
+</div>
+
 
 <header>
   <div class="nav">
@@ -1054,8 +1167,38 @@ document.getElementById('f').addEventListener('submit', function(e) {
     'https://wa.me/919440670385?text=' +
     encodeURIComponent(message);
 
-  window.location.href = whatsappURL;
+  pendingWhatsAppURL = whatsappURL;
+
+  const confirmationOverlay =
+    document.getElementById('confirmationOverlay');
+  confirmationOverlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('confirmationStatus').textContent =
+    'Opening WhatsApp shortly...';
+
+  if (whatsappRedirectTimer) {
+    clearTimeout(whatsappRedirectTimer);
+  }
+  whatsappRedirectTimer = window.setTimeout(
+    continueToWhatsApp,
+    3000
+  );
 });
+
+let pendingWhatsAppURL = '';
+let whatsappRedirectTimer = null;
+
+function continueToWhatsApp() {
+  if (!pendingWhatsAppURL) return;
+
+  if (whatsappRedirectTimer) {
+    clearTimeout(whatsappRedirectTimer);
+    whatsappRedirectTimer = null;
+  }
+
+  window.location.href = pendingWhatsAppURL;
+}
 
 function setService(service) {
   document.getElementById('s').value = service;
@@ -1066,4 +1209,4 @@ setMode('Quotation');
 </script>
 
 </body>
-</html>
+  </html>
