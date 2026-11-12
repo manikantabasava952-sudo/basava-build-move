@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Basava Build & Move | Construction, Materials & Transport</title>
+
+<meta name="description" content="Basava Build & Move provides construction material enquiries, JCB and Hitachi excavators, tipper and lorry transportation and construction services across Andhra Pradesh and Telangana.">
+
+<meta name="theme-color" content="#123c5a">
+<link rel="icon" type="image/jpeg" href="basava-logo.jpg">
+
+<style>
+
+/* BASAVA BUILD & MOVE ENQUIRY CONFIRMATION */
+.confirmation-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.82);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.confirmation-box {
+  background: #ffffff;
+  color: #222;
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 20px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.confirmation-logo-ring {
+  width: 115px;
+  height: 115px;
+  margin: 20px auto;
+  border: 4px solid #e58b24;
+  border-top-color: #174a85;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: basavaSpin 3s linear infinite;
+}
+
+.confirmation-logo-ring img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: 50%;
+  animation: basavaSpinReverse 3s linear infinite;
+}
+
+@keyframes basavaSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes basavaSpinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+.confirmation-box h2 {
+  color: #174a85;
+  margin: 0 0 12px;
+}
+
+.confirmation-box p {
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.confirmation-box h3 {
+  color: #174a85;
+  margin: 18px 0 8px;
+}
+
+.confirmation-button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: #16834a;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.confirmation-status {
+  color: #64717b;
+  font-size: 13px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #17232d;
+  background: #f5f7f9;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 12px #0002;
+}
+
+.nav {
+  max-width: 1150px;
+  margin: auto;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.brand b {
+  color: #123c5a;
+  font-size: 19px;
+}
+
+.brand small {
+  display: block;
+  color: #667;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+nav a {
+  margin-left: 18px;
+  color: #123c5a;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hero {
+  background:
+    linear-gradient(90deg, #102f48ed, #123c5a99),
+    url("https://images.unsplash.com/photo-1773145513138-0d46d3cd4fbd?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
+  color: white;
+  padding: 85px 18px;
+}
+
+.heroin {
+  max-width: 1150px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.1;
+  margin: 0 0 18px;
+}
+
+.hero h1 span {
+  color: #ff9a35;
+}
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.btn {
+  display: inline-block;
+  background: #f28a24;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 7px;
+  font-weight: bold;
+  margin: 10px 8px 0 0;
+}
+
+.btn.secondary {
+  background: white;
+  color: #123c5a;
+}
+
+.trust {
+  background: white;
+  padding: 22px 15px;
+  text-align: center;
+  color: #123c5a;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
+section {
+  max-width: 1150px;
+  margin: auto;
+  padding: 55px 18px;
+}
+
+h2 {
+  text-align: center;
+  color: #123c5a;
+  font-size: 30px;
+  margin: 0 0 12px;
+}
+
+.sub {
+  text-align: center;
+  color: #64717b;
+  line-height: 1.6;
+  margin: 0 auto 30px;
+  max-width: 700px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px #00000012;
+}
+
+.card img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+  display: block;
+}
+
+.cardbody {
+  padding: 20px;
+}
+
+.card h3 {
+  color: #123c5a;
+  margin: 0 0 10px;
+}
+
+.card p {
+  color: #58636d;
+  line-height: 1.6;
+  font-size: 14px;
+  min-height: 65px;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.card-actions a {
+  display: inline-block;
+  background: #f28a24;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.card-actions a.secondary-action {
+  background: #123c5a;
+}
+
+.note {
+  background: #fff5e9;
+  border-left: 4px solid #f28a24;
+  padding: 18px;
+  border-radius: 7px;
+  line-height: 1.6;
+  margin-top: 25px;
+}
+
+.quote {
+  background: #123c5a;
+  color: white;
+  text-align: center;
+  padding: 48px 18px;
+}
+
+.quote h2 {
+  color: white;
+}
+
+.quote p {
+  line-height: 1.6;
+}
+
+.form {
+  max-width: 820px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px #0001;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  color: #123c5a;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  border: 1px solid #ccd2d6;
+  border-radius: 7px;
+  font: inherit;
+  background: white;
+}
+
+textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+button {
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #f28a24;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.mode-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.mode-buttons button {
+  flex: 1;
+  min-width: 150px;
+}
+
+.mode-buttons button.active {
+  background: #123c5a;
+}
+
+#modeInfo {
+  color: #64717b;
+  line-height: 1.5;
+}
+
+#serviceFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+#serviceFields h3,
+#serviceFields > p,
+#serviceFields > button,
+.material-row {
+  grid-column: 1 / -1;
+}
+
+.material-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  border: 1px solid #dce2e6;
+  border-radius: 9px;
+  background: #f8fafb;
+}
+
+.material-row button {
+  background: #a43a32;
+}
+
+.about {
+  background: #eaf0f4;
+  padding: 45px 18px;
+  text-align: center;
+}
+
+.about p {
+  max-width: 850px;
+  margin: 15px auto;
+  line-height: 1.8;
+  color: #4d5c66;
+}
+
+footer {
+  background: #0d1a23;
+  color: #d5dde3;
+  text-align: center;
+  padding: 28px 18px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+footer a {
+  color: #ffad5c;
+}
+
+@media(max-width: 750px) {
+  .nav {
+    align-items: flex-start;
+  }
+
+  .brand b {
+    font-size: 15px;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .hero {
+    padding: 65px 18px;
+  }
+
+  .hero h1 {
+    font-size: 37px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .grid,
+  .fields,
+  #serviceFields,
+  .material-row {
+    grid-template-columns: 1fr;
+  }
+
+  .full,
+  #serviceFields h3,
+  #serviceFields > p,
+  #serviceFields > button,
+  .material-row {
+    grid-column: auto;
+  }
+
+  .card p {
+    min-height: 0;
+  }
+
+  .form {
+    padding: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+
+<div class="confirmation-overlay" id="confirmationOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="confirmationTitle">
+  <div class="confirmation-box">
+    <h2 id="confirmationTitle">Thank You for Choosing Us!</h2>
+    <div class="confirmation-logo-ring">
+      <img src="basava-logo.jpg" alt="Basava Build & Move Logo">
+    </div>
+    <p><strong>Your enquiry details are ready to send to Basava Build &amp; Move.</strong></p>
+    <p>
+      We value your interest in our services. Continue to WhatsApp
+      and tap <strong>Send</strong> so our team receives your requirements.
+    </p>
+    <h3>Building Trust. Moving Progress.</h3>
+    <button type="button" class="confirmation-button"
+            onclick="continueToWhatsApp()">
+      Continue to WhatsApp now
+    </button>
+    <p class="confirmation-status" id="confirmationStatus"
+       aria-live="polite">
+      Opening WhatsApp shortly...
+    </p>
+  </div>
+</div>
+
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img class="logo" src="basava-logo.jpg" alt="Basava Build and Move logo">
+      <div>
+        <b>BASAVA BUILD &amp; MOVE</b>
+        <small>Basava's Group of Constructions • Sri Pardhasardhi Lorry Service</small>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#booking">Book Now</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="heroin">
+    <h1>Book. <span>Move.</span> Build.</h1>
+    <p>
+      Your site requirements, machinery and transportation enquiries
+      in one place. Request quotations for construction materials,
+      earthmoving equipment and vehicle services.
+    </p>
+    <a class="btn" href="#booking">GET A QUOTE</a>
+    <a class="btn secondary" href="#services">EXPLORE SERVICES</a>
+  </div>
+</div>
+
+<div class="trust">
+  Construction Materials | Earthmoving Equipment | Transportation
+</div>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <p class="sub">
+    Tell us what your project needs. Contact us for availability
+    and the latest quotation.
+  </p>
+
+  <div class="grid">
+
+    <div class="card">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/3/33/Jcb.backhoe-loader.jpg"
+        alt="JCB backhoe loader in an outdoor worksite">
+      <div class="cardbody">
+        <h3>JCB Services</h3>
+        <p>Excavation, earthwork, site cleaning, loading and land levelling enquiries.</p>
+        <div class="card-actions">
+          <a href="#booking" onclick="setMode('Quotation');setService('JCB Services')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('JCB Services')">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="hitachi-sand-2.jpg" alt="Hitachi excavator at work">
+      <div class="cardbody">
+        <h3>Hitachi Excavators</h3>
+        <p>Request excavator availability and hourly quotations for your project.</p>
+        <div class="card-actions">
+          <a href="#booking" onclick="setMode('Quotation');setService('Hitachi Excavators')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Hitachi Excavators')">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="river-sand-stock.jpg" alt="River sand stock for construction">
+      <div class="cardbody">
+        <h3>Construction Materials</h3>
+        <p>Sand, stone dust, aggregates, bricks, cement and other site requirements.</p>
+        <div class="card-actions">
+          <a href="#booking" onclick="setMode('Quotation');setService('Construction Materials')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Construction Materials')">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img
+        src="https://images.unsplash.com/photo-1778068846016-b0ae7a27abbe?auto=format&fit=crop&w=900&q=80"
+        alt="Tipper truck at a construction site">
+      <div class="cardbody">
+        <h3>Tipper Services</h3>
+        <p>Enquire about tipper transportation for sand, aggregates, soil and materials.</p>
+        <div class="card-actions">
+          <a href="#booking" onclick="setMode('Quotation');setService('Tipper Services')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Tipper Services')">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img
+        src="https://cmv360.s3.ap-southeast-1.amazonaws.com/gallery_tata_sk_1613_bfc3d2077f.webp"
+        alt="Tata SK 1613 tipper truck">
+      <div class="cardbody">
+        <h3>Lorry Transportation</h3>
+        <p>Request transport arrangements for construction materials and goods using lorry services.</p>
+        <div class="card-actions">
+          <a href="#booking" onclick="setMode('Quotation');setService('Lorry Transportation')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Lorry Transportation')">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img
+        src="https://www.jayabherigroup.com/thesahasra/project-progress/january-2024/block-f.jpg"
+        alt="Building under construction with scaffolding">
+      <div class="cardbody">
+        <h3>Construction &amp; Site Work</h3>
+        <p>Enquire about building construction, site preparation and related civil work.</p>
+        <div class="card-actions">
+          <a href="#booking" onclick="setMode('Quotation');setService('Construction & Site Work')">Request Quotation</a>
+          <a class="secondary-action" href="#booking" onclick="setMode('Booking');setService('Construction & Site Work')">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>Need today's price?</strong><br>
+    Material prices and machinery charges can change.
+    Contact us with your location, quantity and required date
+    to request the latest quotation.
+  </div>
+</section>
+
+<div class="quote">
+  <h2>Have a Site Requirement?</h2>
+  <p>Send your details and our team can coordinate your enquiry.</p>
+  <a class="btn" href="#booking">SEND YOUR REQUIREMENT</a>
+</div>
+
+<section id="booking">
+  <h2>Basava Build &amp; Move – Service Enquiry</h2>
+  <p class="sub">
+    Choose quotation or booking and share your requirements.
+  </p>
+
+  <div class="form">
+    <form id="f">
+      <div class="fields">
+
+        <div class="full">
+          <h3>Select Your Option</h3>
+          <div class="mode-buttons">
+            <button type="button" onclick="setMode('Quotation')" id="quoteBtn">
+              Request Quotation
+            </button>
+            <button type="button" onclick="setMode('Booking')" id="bookBtn">
+              Book Now
+            </button>
+          </div>
+          <p id="modeInfo">Get the latest price for your requirement.</p>
+        </div>
+
+        <label>
+          Name
+          <input id="n" required placeholder="Your full name">
+        </label>
+
+        <label>
+          Mobile Number
+          <input id="p" type="tel" required placeholder="Your mobile number">
+        </label>
+
+        <label class="full">
+          Select Service
+          <select id="s" required onchange="showServiceFields()">
+            <option value="">Select service</option>
+            <option>JCB Services</option>
+            <option>Hitachi Excavators</option>
+            <option>Construction Materials</option>
+            <option>Tipper Services</option>
+            <option>Lorry Transportation</option>
+            <option>Construction &amp; Site Work</option>
+          </select>
+        </label>
+
+        <div class="full" id="serviceFields">
+          <p>Select a service to see its requirements.</p>
+        </div>
+
+        <label class="full">
+          Site / Delivery Location
+          <textarea id="l" required placeholder="Enter complete location"></textarea>
+        </label>
+
+        <label>
+          Required Date
+          <input id="d" type="date">
+        </label>
+
+        <label>
+          Preferred Time (optional)
+          <input id="t" type="time">
+        </label>
+
+        <label class="full">
+          Extra Details
+          <textarea id="x" placeholder="Any additional information"></textarea>
+        </label>
+
+        <div class="full">
+          <button type="submit" id="submitBtn">
+            SEND QUOTATION REQUEST ON WHATSAPP
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="about" id="about">
+  <h2>About Basava Build &amp; Move</h2>
+  <p>
+    <strong>BASAVA'S GROUP OF CONSTRUCTIONS</strong> and
+    <strong>SRI PARDHASARDHI LORRY SERVICE</strong>
+    bring construction-related enquiries, earthmoving equipment
+    and transportation requirements together through one contact point.
+  </p>
+  <p>
+    Our aim is to make it easier for customers to request service
+    information and quotations for their project requirements.
+  </p>
+  <p>
+    <strong>Serving enquiries across Andhra Pradesh and Telangana.</strong>
+  </p>
+</div>
+
+<footer>
+  <strong>BASAVA BUILD &amp; MOVE</strong><br>
+  Basava's Group of Constructions • Sri Pardhasardhi Lorry Service<br>
+  WhatsApp: +91 94406 70385<br>
+  <strong>Swamiae Sharanam Ayyapa • Tatvamasi</strong><br>
+  © 2026 Basava Build &amp; Move. All rights reserved.<br>
+  <small>
+  </small>
+</footer>
+
+<script>
+let enquiryMode = 'Quotation';
+
+function setMode(mode) {
+  enquiryMode = mode;
+
+  document.getElementById('modeInfo').textContent =
+    mode === 'Booking'
+      ? 'Booking request only. Availability and price will be confirmed by our team.'
+      : 'Get the latest price for your requirement.';
+
+  document.getElementById('submitBtn').textContent =
+    mode === 'Booking'
+      ? 'SEND BOOKING REQUEST ON WHATSAPP'
+      : 'SEND QUOTATION REQUEST ON WHATSAPP';
+
+  document.getElementById('quoteBtn').classList.toggle(
+    'active', mode === 'Quotation'
+  );
+
+  document.getElementById('bookBtn').classList.toggle(
+    'active', mode === 'Booking'
+  );
+}
+
+function showServiceFields() {
+  const service = document.getElementById('s').value;
+  const area = document.getElementById('serviceFields');
+  let html = '';
+
+  if (
+    service === 'JCB Services' ||
+    service === 'Hitachi Excavators'
+  ) {
+    html = `
+      <h3>${service} Details</h3>
+
+      <label>
+        Required Working Hours
+        <input id="hours" type="number" min="1"
+          placeholder="Example: 8 hours" required>
+      </label>
+
+      <label>
+        Type of Work
+        <select id="workType" required>
+          <option value="">Select work</option>
+          <option>Excavation</option>
+          <option>Earthwork</option>
+          <option>Site cleaning</option>
+          <option>Land levelling</option>
+          <option>Loading</option>
+          <option>Rock breaking</option>
+          <option>Other work</option>
+        </select>
+      </label>
+    `;
+  }
+
+  else if (service === 'Construction Materials') {
+    html = `
+      <h3>Construction Material Requirements</h3>
+
+      <div id="materialRows">
+        ${materialRow()}
+      </div>
+
+      <button type="button" onclick="addMaterial()">
+        + Add Another Material
+      </button>
+    `;
+  }
+
+  else if (service === 'Tipper Services') {
+    html = `
+      <h3>Tipper Details</h3>
+
+      <label>
+        Select Tipper Type
+        <select id="tipperType" required onchange="updateTipperType()">
+          <option value="">Select tipper</option>
+          <option value="Small Tipper - 3 Units">Small Tipper - 3 Units</option>
+          <option value="Big Tipper - 6 Units">Big Tipper - 6 Units</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+
+      <label id="otherTipperLabel" style="display:none">
+        Specify Other Tipper
+        <input id="otherTipper" placeholder="Enter vehicle type">
+      </label>
+
+      <label>
+        Material to Transport
+        <select id="tipperMaterial" required onchange="updateTipperMaterial()">
+          <option value="">Select material</option>
+          <option>River Sand</option>
+          <option>Robo Sand</option>
+          <option>Gravel</option>
+          <option>Stone Dust</option>
+          <option>Soil</option>
+          <option>20 mm Aggregate</option>
+          <option>40 mm Aggregate</option>
+          <option>Other</option>
+        </select>
+      </label>
+
+      <label id="otherTipperMaterialLabel" style="display:none">
+        Specify Other Material
+        <input id="otherTipperMaterial" placeholder="Enter material name">
+      </label>
+
+      <label>
+        Number of Trips
+        <input id="trips" type="number" min="1"
+          placeholder="Enter number of trips" required>
+      </label>
+    `;
+  }
+
+  else if (service === 'Lorry Transportation') {
+    html = `
+      <h3>Transportation Details</h3>
+
+      <label>
+        Goods / Material
+        <input id="goods" required placeholder="What needs transportation?">
+      </label>
+
+      <label>
+        Number of Trips
+        <input id="trips" type="number" min="1"
+          placeholder="Number of trips" required>
+      </label>
+
+      <label>
+        Approximate Weight
+        <input id="weight" placeholder="Example: 5 tonnes">
+      </label>
+
+      <label>
+        From Location
+        <input id="fromLocation" required placeholder="Loading location">
+      </label>
+
+      <label>
+        To Location
+        <input id="toLocation" required placeholder="Delivery location">
+      </label>
+    `;
+  }
+
+  else if (service === 'Construction & Site Work') {
+    html = `
+      <h3>Project Details</h3>
+
+      <label>
+        Type of Work
+        <select id="constructionType" required>
+          <option value="">Select work</option>
+          <option>Building construction</option>
+          <option>Site preparation</option>
+          <option>Renovation</option>
+          <option>Compound wall</option>
+          <option>Other civil work</option>
+        </select>
+      </label>
+
+      <label>
+        Plot / Building Dimensions
+        <input id="dimensions" placeholder="Example: 30 x 40 feet">
+      </label>
+
+      <label class="full">
+        Project Description
+        <textarea id="projectDetails" placeholder="Describe your project"></textarea>
+      </label>
+    `;
+  }
+
+  area.innerHTML = html ||
+    '<p>Select a service to see its requirements.</p>';
+}
+
+function materialRow() {
+  return `
+    <div class="material-row">
+
+      <label>
+        Material
+        <select class="materialName" required
+          onchange="updateMaterialRow(this)">
+          <option value="">Select material</option>
+          <option>River Sand</option>
+          <option>Robo Sand</option>
+          <option>Stone Dust</option>
+          <option>20 mm Aggregate</option>
+          <option>40 mm Aggregate</option>
+          <option>Gravel</option>
+          <option>Bricks</option>
+          <option>Cement</option>
+          <option>Other</option>
+        </select>
+      </label>
+
+      <label class="otherMaterialLabel" style="display:none">
+        Specify Material
+        <input class="otherMaterialName" placeholder="Enter material name">
+      </label>
+
+      <label>
+        Quantity
+        <input class="materialQty" type="number"
+          min="0.1" step="any" placeholder="Enter quantity" required>
+      </label>
+
+      <label>
+        Unit
+        <select class="materialUnit" required>
+          <option>Units</option>
+          <option>Tonnes</option>
+        </select>
+      </label>
+
+      <button type="button" onclick="this.parentElement.remove()">
+        Remove Material
+      </button>
+
+    </div>
+  `;
+}
+
+function updateMaterialRow(select) {
+  const row = select.closest('.material-row');
+  const unit = row.querySelector('.materialUnit');
+  const otherLabel = row.querySelector('.otherMaterialLabel');
+  const otherInput = row.querySelector('.otherMaterialName');
+
+  const material = select.value;
+
+  otherLabel.style.display =
+    material === 'Other' ? 'block' : 'none';
+
+  otherInput.required = material === 'Other';
+
+  let options = ['Units', 'Tonnes'];
+
+  if (material === 'Cement') {
+    options = ['Bags'];
+  }
+  else if (material === 'Bricks') {
+    options = ['Pieces'];
+  }
+  else if (material === 'Other') {
+    options = [
+      'Units',
+      'Tonnes',
+      'CFT',
+      'Cubic metres',
+      'Bags',
+      'Pieces',
+      'Loads'
+    ];
+  }
+
+  unit.innerHTML = options.map(item =>
+    `<option>${item}</option>`
+  ).join('');
+}
+
+function addMaterial() {
+  document.getElementById('materialRows')
+    .insertAdjacentHTML('beforeend', materialRow());
+}
+
+function updateTipperType() {
+  const type = document.getElementById('tipperType').value;
+  const label = document.getElementById('otherTipperLabel');
+  const input = document.getElementById('otherTipper');
+
+  label.style.display = type === 'Other' ? 'block' : 'none';
+  input.required = type === 'Other';
+}
+
+function updateTipperMaterial() {
+  const material = document.getElementById('tipperMaterial').value;
+  const label = document.getElementById('otherTipperMaterialLabel');
+  const input = document.getElementById('otherTipperMaterial');
+
+  label.style.display = material === 'Other' ? 'block' : 'none';
+  input.required = material === 'Other';
+}
+
+function getRequirements(service) {
+
+  if (
+    service === 'JCB Services' ||
+    service === 'Hitachi Excavators'
+  ) {
+    return 'Working Hours: ' +
+      document.getElementById('hours').value +
+      '\nWork Type: ' +
+      document.getElementById('workType').value;
+  }
+
+  if (service === 'Construction Materials') {
+    const rows = document.querySelectorAll('.material-row');
+    let result = 'Materials:\n';
+
+    rows.forEach((row, i) => {
+      const material = row.querySelector('.materialName').value;
+      const other = row.querySelector('.otherMaterialName').value;
+      const quantity = row.querySelector('.materialQty').value;
+      const unit = row.querySelector('.materialUnit').value;
+
+      result += (i + 1) + '. ' +
+        (material === 'Other' ? other : material) +
+        ': ' + quantity + ' ' + unit + '\n';
+    });
+
+    return result;
+  }
+
+  if (service === 'Tipper Services') {
+    const type = document.getElementById('tipperType').value;
+    const material = document.getElementById('tipperMaterial').value;
+
+    return 'Tipper Type: ' +
+      (type === 'Other'
+        ? document.getElementById('otherTipper').value
+        : type) +
+      '\nMaterial: ' +
+      (material === 'Other'
+        ? document.getElementById('otherTipperMaterial').value
+        : material) +
+      '\nNumber of Trips: ' +
+      document.getElementById('trips').value;
+  }
+
+  if (service === 'Lorry Transportation') {
+    return 'Goods: ' +
+      document.getElementById('goods').value +
+      '\nTrips: ' +
+      document.getElementById('trips').value +
+      '\nWeight: ' +
+      document.getElementById('weight').value +
+      '\nFrom: ' +
+      document.getElementById('fromLocation').value +
+      '\nTo: ' +
+      document.getElementById('toLocation').value;
+  }
+
+  if (service === 'Construction & Site Work') {
+    return 'Work Type: ' +
+      document.getElementById('constructionType').value +
+      '\nDimensions: ' +
+      document.getElementById('dimensions').value +
+      '\nProject: ' +
+      document.getElementById('projectDetails').value;
+  }
+
+  return '';
+}
+
+document.getElementById('f').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const service = document.getElementById('s').value;
+  const requirements = getRequirements(service);
+
+  const message =
+    'BASAVA BUILD & MOVE - ' +
+    enquiryMode.toUpperCase() + ' REQUEST\n\n' +
+    'Name: ' + document.getElementById('n').value +
+    '\nMobile: ' + document.getElementById('p').value +
+    '\nService: ' + service +
+    '\n\nRequirements:\n' + requirements +
+    '\nLocation: ' + document.getElementById('l').value +
+    '\nDate: ' + document.getElementById('d').value +
+    '\nPreferred Time: ' + document.getElementById('t').value +
+    '\nExtra Details: ' + document.getElementById('x').value +
+    '\n\nPlease confirm availability and quotation.';
+
+  const whatsappURL =
+    'https://wa.me/919440670385?text=' +
+    encodeURIComponent(message);
+
+  pendingWhatsAppURL = whatsappURL;
+
+  const confirmationOverlay =
+    document.getElementById('confirmationOverlay');
+  confirmationOverlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('confirmationStatus').textContent =
+    'Opening WhatsApp shortly...';
+
+  if (whatsappRedirectTimer) {
+    clearTimeout(whatsappRedirectTimer);
+  }
+  whatsappRedirectTimer = window.setTimeout(
+    continueToWhatsApp,
+    3000
+  );
+});
+
+let pendingWhatsAppURL = '';
+let whatsappRedirectTimer = null;
+
+function continueToWhatsApp() {
+  if (!pendingWhatsAppURL) return;
+
+  if (whatsappRedirectTimer) {
+    clearTimeout(whatsappRedirectTimer);
+    whatsappRedirectTimer = null;
+  }
+
+  window.location.href = pendingWhatsAppURL;
+}
+
+function setService(service) {
+  document.getElementById('s').value = service;
+  showServiceFields();
+}
+
+setMode('Quotation');
+</script>
+
+</body>
+</html>
